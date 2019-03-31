@@ -48,8 +48,11 @@ public class EvaluationUtil {
                         field.setAccessible(true);
                         if (valueEntry.getValue() instanceof Boolean) {
                             field.setBoolean(object, (Boolean) valueEntry.getValue());
-                        } else {
+                        }
+                        if (valueEntry.getValue() instanceof String) {
                             field.set(object, valueEntry.getValue().toString());
+                        } else {
+                            field.set(object, valueEntry.getValue());
                         }
                     }
                 } catch (IllegalAccessException e) {

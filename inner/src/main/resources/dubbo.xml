@@ -1,0 +1,28 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <dubbo:application owner="roll" name="test-consumer"/>
+
+    <dubbo:protocol name="dubbo" port="20880"/>
+
+    <bean id="referenceConfig" class="org.apache.dubbo.config.ReferenceConfig" autowire="byType">
+        <property name="application">
+            <bean class="org.apache.dubbo.config.ApplicationConfig">
+                <property name="name" value="wrench-dubbo-generic"/>
+                <property name="registry">
+                    <bean class="org.apache.dubbo.config.RegistryConfig">
+                        <property name="address" value="${dubbo.zookeeper.host}"/>
+                        <property name="protocol" value="zookeeper"/>
+                        <property name="group" value="${dubbo.zookeeper.root}"/>
+                    </bean>
+                </property>
+            </bean>
+        </property>
+        <property name="generic" value="true"/>
+    </bean>
+</beans>
