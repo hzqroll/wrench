@@ -25,7 +25,6 @@ public class ReferenceConfigLocalCache {
         return referenceConfigMap.get(getKey(genericConfig));
     }
 
-
     public ReferenceConfig put(DubboGenericConfig genericConfig, ReferenceConfig referenceConfig) {
         return referenceConfigMap.put(getKey(genericConfig), referenceConfig);
     }

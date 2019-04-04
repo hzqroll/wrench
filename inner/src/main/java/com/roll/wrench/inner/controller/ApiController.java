@@ -2,6 +2,7 @@ package com.roll.wrench.inner.controller;
 
 import com.roll.wrench.inner.dubbo.GenericServiceImpl;
 import com.roll.wrench.inner.pojo.DubboGenericConfig;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ApiController {
 
-    private GenericServiceImpl genericService = new GenericServiceImpl();
+    @Autowired
+    private GenericServiceImpl genericService;
 
     @RequestMapping("/invoke/dubbo")
     public String invokeDubbo() {
