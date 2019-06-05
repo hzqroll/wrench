@@ -19,7 +19,7 @@ public class ApiController {
     @RequestMapping("/invoke/dubbo")
     public String invokeDubbo() {
         DubboGenericConfig genericConfig = new DubboGenericConfig();
-        genericConfig.setServiceName("cn.fraudmetrix.creditcloud.bodyguard.api.intf.BodyGuard");
+        genericConfig.setServiceName("cn.f.c.b.api.intf.BodyGuard");
         genericConfig.setMethodName("queryEncryptConfig");
         genericConfig.setVersion("1.0.0_118_hzq");
         genericConfig.setInputParamsArray(new String[]{"java.lang.String", "java.lang.String"});

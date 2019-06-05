@@ -15,7 +15,7 @@ public class DubboConfigController {
     @RequestMapping("dubbo/config")
     public String getConfig(Model model) {
         DubboGenericConfigDO genericConfig = new DubboGenericConfigDO();
-        genericConfig.setServiceName("cn.fraudmetrix.creditcloud.bodyguard.api.intf.BodyGuard");
+        genericConfig.setServiceName("cn.d.c.b.api.intf.B");
         genericConfig.setMethodName("queryEncryptConfig");
         genericConfig.setVersion("1.0.0_118_hzq");
         genericConfig.setInput("input");

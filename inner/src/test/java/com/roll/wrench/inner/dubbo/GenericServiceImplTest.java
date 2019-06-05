@@ -11,7 +11,7 @@ public class GenericServiceImplTest {
     @Test
     public void invokeTest() {
         DubboGenericConfig  genericConfig = new DubboGenericConfig();
-        genericConfig.setServiceName("cn.fraudmetrix.creditcloud.bodyguard.api.intf.BodyGuard");
+        genericConfig.setServiceName("cn.f.c.bodybguard.api.intf.BodyGuard");
         genericConfig.setMethodName("queryEncryptConfig");
         genericConfig.setInputParamsArray(new String[]{"java.lang.String", "java.lang.String"});
         genericConfig.setInputObjectArray(new String[]{"zhaoyao", "balala"});
