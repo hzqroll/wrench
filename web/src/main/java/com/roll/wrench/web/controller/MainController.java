@@ -23,4 +23,9 @@ public class MainController {
     public String index() {
         return "layout/default";
     }
+
+    @RequestMapping("/chat")
+    public String chat() {
+        return "chat";
+    }
 }

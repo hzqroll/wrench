@@ -31,7 +31,7 @@
                 var ws = null
                 $('#connect').click(function () {
                     if (ws == null || ws.readyState != 1) {
-                        ws = new WebSocket($('#url').val())
+                        ws = new WebSocket("ws://127.0.0.1:9991/ws");
                         ws.onerror = function (e) {
                             log('Error : ' + e.message)
                         }
