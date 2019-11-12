@@ -17,7 +17,6 @@ import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketCl
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.InsecureTrustManagerFactory;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
@@ -30,7 +29,7 @@ import java.net.URI;
  */
 @Service
 public class WebSocketClient {
-    private static final String URL = System.getProperty("url", "ws://127.0.0.1:80/websocket");
+    private static final String URL = System.getProperty("url", "ws://127.0.0.1:9040/websocket");
 
     public static void main(String[] args) throws Exception {
         URI uri = new URI(URL);

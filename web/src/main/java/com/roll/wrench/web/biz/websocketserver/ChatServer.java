@@ -10,11 +10,8 @@ import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
 import io.netty.handler.ssl.SslContextBuilder;
 import io.netty.handler.ssl.util.SelfSignedCertificate;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import javax.net.ssl.SSLException;
-import java.security.cert.CertificateException;
 
 /**
  * @author roll

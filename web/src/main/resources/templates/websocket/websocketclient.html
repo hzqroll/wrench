@@ -10,7 +10,7 @@
     var socket;
     if (window.WebSocket) {
         // 建立连接
-        socket = new WebSocket("ws://localhost:9040/ws");
+        socket = new WebSocket("ws://localhost:9991/ws");
         // 回调 onmessage 方法
         socket.onmessage = function (event) {
             var ta = document.getElementById('responseText');
