@@ -1,0 +1,10 @@
+.chat-area{
+    width: 50%;
+    height: 60px;
+    background-color: darkcyan;
+    text-align: center;
+    position: center;
+    left: 50%;
+    right: 50%;
+    margin: 0 auto;
+}
