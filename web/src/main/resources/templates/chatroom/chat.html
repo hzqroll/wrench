@@ -7,9 +7,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
 
     <title>醉生梦死</title>
-    <link href="/webjars/materializecss/1.0.0/css/materialize.css" type="text/css" rel="stylesheet"
-          media="screen,projetion"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.min.css">
     <link href="/chat.css" type="text/css" rel="stylesheet"/>
+
+    <script src="webjars/materializecss.1.0.0/css/materialize.css"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script type="text/javascript">
+        function log(msg) {
+            var ta = document.getElementById('responseContent');
+            ta.value += msg + "\r\n";
+        }
+
+        $(function () {
+            $('#url').val((location.protocol.indexOf('https') == -1 ? 'ws://' : 'wss://') + location.host + '/ws')
+            if (!WebSocket) {
+                $('#not-supported').show()
+            } else {
+                var ws = null;
+                $('#connect').click(function () {
+                    if (ws == null || ws.readyState != 1) {
+                        ws = new WebSocket("ws://127.0.0.1:9991/ws");
+                        ws.onerror = function (e) {
+                            log('Error : ' + e.message)
+                        };
+                        ws.onopen = function () {
+                            log('connected')
+                        };
+                        ws.onclose = function () {
+                            log('disconnected')
+                        };
+                        ws.onmessage = function (event) {
+                            log(event.data);
+                        };
+                        $('#send').click(function () {
+                            var msg = $('#msg').val();
+                            $('#msg').val('');
+                            if (ws.send(msg)) {
+                                log('Message sent')
+                            } else {
+                                log('Message not sent')
+                            }
+                        })
+                    } else {
+                        log('closing connection');
+                        ws.close()
+                    }
+                })
+            }
+        })
+    </script>
 </head>
 <body>
 
@@ -21,13 +69,31 @@
         <form class="col s12">
             <div class="row">
                 <div class="input-field col s12">
-                    <textarea id="textarea1" class="materialize-textarea textsms"></textarea>
-                    <label for="textarea1" class="textsms" length="256">文本域</label>
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="address" class="materialize-textarea"></textarea>
+                    <label for="address">输入你想发送的消息</label>
+                </div>
+
+                <a class="waves-effect waves-light btn" type="submit" id="send">发送</a>
+
+                <div class="row">
+                    <label>建立链接</label>
+                    <div class="switch" id="connect"><label>Off<input type="checkbox" checked><span class="lever"></span>On</label></div>
+                </div>
+                <div class="row">
+                    <label>Materialize Disabled Switch</label>
+                    <div class="switch"><label>Off<input disabled type="checkbox"><span class="lever"></span>On</label></div>
                 </div>
             </div>
         </form>
+        <a class="waves-effect waves-light btn">按钮</a>
+        <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>按钮</a>
     </div>
+
+    <h2>客户端接收到服务端返回的应答消息</h2>
+    <textarea id = "responseContent" style = "width:1024px; height:300px"></textarea>
 </form>
+
 
 </body>
 </html>

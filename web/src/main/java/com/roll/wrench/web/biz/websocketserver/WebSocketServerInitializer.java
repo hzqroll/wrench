@@ -7,7 +7,10 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.codec.http.websocketx.extensions.compression.WebSocketServerCompressionHandler;
+import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.ssl.SslContext;
+import io.netty.handler.logging.LogLevel;
+
 
 /**
  * @author roll
@@ -28,7 +31,7 @@ public class WebSocketServerInitializer extends ChannelInitializer<SocketChannel
         if (sslContext != null) {
             pipeline.addLast(sslContext.newHandler(ch.alloc()));
         }
-
+        pipeline.addLast(new LoggingHandler(LogLevel.DEBUG));
         pipeline.addLast(new HttpServerCodec());
         pipeline.addLast(new HttpObjectAggregator(65536));
         pipeline.addLast(new WebSocketServerCompressionHandler());
