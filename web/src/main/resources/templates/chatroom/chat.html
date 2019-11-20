@@ -42,8 +42,8 @@
                             log(event.data);
                         };
                         $('#send').click(function () {
-                            var msg = $('#msg').val();
-                            $('#msg').val('');
+                            var msg = $('#address').val();
+                            $('#address').val('');
                             if (ws.send(msg)) {
                                 log('Message sent')
                             } else {
