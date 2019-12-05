@@ -27,7 +27,7 @@
             } else {
                 var ws = null;
                 $('#connect').click(function () {
-                    if (ws == null || ws.readyState != 1) {
+                    if (ws == null || ws.readyState !== 1) {
                         ws = new WebSocket("ws://127.0.0.1:9991/ws");
                         ws.onerror = function (e) {
                             log('Error : ' + e.message)
@@ -43,11 +43,14 @@
                         };
                         $('#send').click(function () {
                             var msg = $('#address').val();
-                            $('#address').val('');
-                            if (ws.send(msg)) {
-                                log('Message sent')
+                            if (ws.readyState === WebSocket.OPEN) {
+                                $('#address').val('');
+                                if (msg !== '') {
+                                    ws.send(msg);
+                                    //log('Message sent');
+                                }
                             } else {
-                                log('Message not sent')
+                                alert("WebSocket连接没有建立成功!");
                             }
                         })
                     } else {
@@ -68,32 +71,31 @@
     <div class="row">
         <form class="col s12">
             <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">mode_edit</i>
-                    <textarea id="address" class="materialize-textarea"></textarea>
-                    <label for="address">输入你想发送的消息</label>
-                </div>
-
-                <a class="waves-effect waves-light btn" type="submit" id="send">发送</a>
 
                 <div class="row">
                     <label>建立链接</label>
-                    <div class="switch" id="connect"><label>Off<input type="checkbox" checked><span class="lever"></span>On</label></div>
+                    <div class="switch" id="connect"><label>Off<input type="checkbox"><span
+                            class="lever"></span>On</label></div>
                 </div>
-                <div class="row">
-                    <label>Materialize Disabled Switch</label>
-                    <div class="switch"><label>Off<input disabled type="checkbox"><span class="lever"></span>On</label></div>
+
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">mode_edit</i>
+                    <textarea id="address" class="materialize-textarea"></textarea>
+<!--                    <label for="address">输入你想发送的消息</label>-->
                 </div>
+
+                <a class="waves-effect waves-light btn" type="submit" id="send">发送</a>
             </div>
         </form>
-        <a class="waves-effect waves-light btn">按钮</a>
-        <a class="waves-effect waves-light btn"><i class="material-icons left">cloud</i>按钮</a>
     </div>
 
-    <h2>客户端接收到服务端返回的应答消息</h2>
-    <textarea id = "responseContent" style = "width:1024px; height:300px"></textarea>
+    <a class="waves-effect waves-light btn">客户端接收到服务端返回的应答消息</a>
+    <div class="input-field col s12">
+        <i class="material-icons prefix">mode_edit</i>
+        <label for="responseContent"></label>
+        <textarea id=responseContent style="overflow-x:hidden"></textarea>
+    </div>
 </form>
-
 
 </body>
 </html>

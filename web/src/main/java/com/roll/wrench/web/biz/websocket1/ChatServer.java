@@ -1,9 +1,9 @@
 package com.roll.wrench.web.biz.websocket1;
 
+import com.roll.wrench.web.biz.websocket1.test.TestServerInitializer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelInitializer;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.group.ChannelGroup;
 import io.netty.channel.group.DefaultChannelGroup;
@@ -26,8 +26,8 @@ public class ChatServer implements InitializingBean {
     private final EventLoopGroup group = new NioEventLoopGroup();
     private Channel channel;
 
-    private ChannelInitializer<Channel> createInitializer(ChannelGroup channels) {
-        return new ChatServerInitializer(channels);
+    private TestServerInitializer createInitializer() {
+        return new TestServerInitializer();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ChatServer implements InitializingBean {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.group(group)
                     .channel(NioServerSocketChannel.class)
-                    .childHandler(createInitializer(channelGroup));
+                    .childHandler(createInitializer());
 
             ChannelFuture future = null;
             try {
