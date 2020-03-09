@@ -18,6 +18,7 @@ public class BloomFilterMemory<T> implements BloomFilter<T> {
 
     public BloomFilterMemory(FilterBuilder config) {
         this.config = config;
+        bloom = new BitSet(config.getSize());
     }
 
     @Override

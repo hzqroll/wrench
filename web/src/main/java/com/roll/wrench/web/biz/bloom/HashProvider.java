@@ -87,7 +87,9 @@ public class HashProvider {
      */
     public static enum HashMethod {
         // MD2类型Hash算法
-        MD2((bytes, m, k) -> HashProvider.hashCrypt(bytes, m, k, "MD2"));
+        SHA1((bytes, m, k) -> HashProvider.hashCrypt(bytes, m, k, "SHA-1")),
+        MD2((bytes, m, k) -> HashProvider.hashCrypt(bytes, m, k, "MD2")),
+        MD5((bytes, m, k) -> HashProvider.hashCrypt(bytes, m, k, "MD5"));
 
         private HashFunction hashFunction;
 
