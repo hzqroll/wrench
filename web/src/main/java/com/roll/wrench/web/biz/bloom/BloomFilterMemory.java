@@ -22,17 +22,34 @@ public class BloomFilterMemory<T> implements BloomFilter<T> {
 
     @Override
     public FilterBuilder config() {
-        return null;
+        return config;
     }
 
     @Override
     public boolean addRaw(byte[] raw) {
-        return false;
+        boolean added = false;
+        for (int position : hash(raw)) {
+            if (!getBits(position)) {
+                added = true;
+                setBit(position, true);
+            }
+        }
+        return added;
+    }
+
+    @Override
+    public boolean contains(byte[] bytes) {
+        for (int position : hash(bytes)) {
+            if (!getBits(position)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public void clear() {
-
+        bloom.clear();
     }
 
     protected void setBit(int index, boolean to) {
@@ -40,6 +57,10 @@ public class BloomFilterMemory<T> implements BloomFilter<T> {
     }
 
     protected boolean setBit(int index) {
+        return bloom.get(index);
+    }
+
+    protected boolean getBits(int index) {
         return bloom.get(index);
     }
 }
