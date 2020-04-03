@@ -152,4 +152,12 @@
             </build>
         </profile>
     </profiles>-->
+
+    <repositories>
+        <repository>
+            <id>nexus-daocloud</id>
+            <name>Nexus daocloud</name>
+            <url>http://nexus.daocloud.io/repository/maven-public/</url>
+        </repository>
+    </repositories>
 </project>
