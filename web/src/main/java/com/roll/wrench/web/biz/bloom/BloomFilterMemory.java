@@ -11,6 +11,7 @@ import java.util.BitSet;
 public class BloomFilterMemory<T> implements BloomFilter<T> {
     private final FilterBuilder config;
 
+    private int a = 10;
     /**
      * 底层数据结构
      */

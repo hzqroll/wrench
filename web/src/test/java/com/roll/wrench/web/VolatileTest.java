@@ -6,9 +6,9 @@ package com.roll.wrench.web;
  */
 public class VolatileTest {
 
-    public synchronized void printA() {
+    public synchronized static void printA() {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -37,12 +37,14 @@ public class VolatileTest {
         System.out.println(a);*/
 
         VolatileTest volatileTest = new VolatileTest();
+        VolatileTest volatileTest2 = new VolatileTest();
+
         Thread thread1 = new Thread(() -> {
             volatileTest.printA();
         });
 
         Thread thread2 = new Thread(() -> {
-            volatileTest.printB();
+            volatileTest2.printA();
         });
 
         thread1.start();

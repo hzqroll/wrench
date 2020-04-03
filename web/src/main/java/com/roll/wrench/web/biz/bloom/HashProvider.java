@@ -36,17 +36,18 @@ public class HashProvider {
         // Add salt to the hash deterministically in order to generate different
         // hashes for each round
         // Alternative: use pseudorandom sequence
-        Random r = new Random(seed32);
         byte[] digest = new byte[0];
         while (computedHashes < k) {
             // byte[] saltBytes =
             // ByteBuffer.allocate(4).putInt(r.nextInt()).array();
             cryptHash.update(digest);
+            // 获取加密后的结果
             digest = cryptHash.digest(value);
             BitSet hashed = BitSet.valueOf(digest);
 
             // Convert the hash to numbers in the range [0,size)
             // Size of the BloomFilter rounded to the next power of two
+            // 获取m转换为二进制前面0的个数，被32减
             int filterSize = 32 - Integer.numberOfLeadingZeros(m);
             // Computed hash bits
             int hashBits = digest.length * 8;
